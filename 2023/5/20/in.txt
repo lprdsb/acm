@@ -1,0 +1,27 @@
+12 26
+1 Rachel 1 1
+1 Alan 2 2
+1 Howar 3 3
+1 Alan 4 4
+1 Howar 5 5
+1 Bob 6 6
+1 Barry 7 7
+1 Isabel 8 8
+1 Gabrielle 9 9
+1 Grace 10 10
+1 Gabrielle 11 11
+1 Grace 11 11
+2 1 11
+2 1 11
+2 1 11
+2 1 11
+2 1 11
+2 1 11
+2 1 11
+2 1 11
+2 1 11
+2 1 11
+2 1 11
+2 1 11
+2 1 11
+2 1 11

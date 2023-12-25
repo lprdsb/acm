@@ -1,0 +1,11 @@
+2
+3 3
+abc
+ghi
+def
+bcd
+efg
+hia
+1 3
+abc
+def

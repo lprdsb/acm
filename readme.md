@@ -11,11 +11,11 @@
 #### 因数个数小trick
 
 $$
-d(n) \% 2=[n=k^2]
+d(n)\%2=[n=k^2]
 $$
 
 当且仅当该数是完全平方数时，因数个数是奇数个
 
 #### 极小mex
 
-![image-20231225192410689](C:\Users\lpr\AppData\Roaming\Typora\typora-user-images\image-20231225192410689.png)
+![image-20231225192410689](picture/image-20231225192410689.png)

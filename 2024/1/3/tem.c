@@ -1,9 +1,12 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+int a[10];
+
+void fun(int b[3]) {
+    printf("%d\n", sizeof(b) / sizeof(int));
+}
+
 int main(void) {
-    char *s[] = { "abc", "defg" };
-    char **p[] = { s, s + 1 }, ***p1;
-    p1 = p;
-    printf("%s", *(*p1 + 1));
+    fun(a);
 }

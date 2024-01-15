@@ -14,7 +14,7 @@ $$
 
 ## 极小mex
 
-![image-20231225192410689](F:\Documents\acm\picture\image-20231225192410689.png)
+![极小mex](F:\Documents\acm\picture\极小mex.png)
 
 # 2023.12.31
 
@@ -46,3 +46,17 @@ $$
 ![image-20231231191058535](C:\Users\lpr\AppData\Roaming\Typora\typora-user-images\image-20231231191058535.png)
 
 https://zhuanlan.zhihu.com/p/501183534
+
+# 2024.1.7
+
+## 矩阵树
+
+![image-20240107192512990](C:\Users\lpr\AppData\Roaming\Typora\typora-user-images\image-20240107192512990.png)
+
+## BEST定理
+
+![image-20240107192535167](C:\Users\lpr\AppData\Roaming\Typora\typora-user-images\image-20240107192535167.png)
+
+## 连续段dp
+
+[P5999 [CEOI2016] kangaroo](https://www.luogu.com.cn/problem/P5999)

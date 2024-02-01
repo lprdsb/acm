@@ -60,3 +60,38 @@ https://zhuanlan.zhihu.com/p/501183534
 ## 连续段dp
 
 [P5999 [CEOI2016] kangaroo](https://www.luogu.com.cn/problem/P5999)
+
+# 2024_1_22
+
+### dp trick
+
+![image-20240122183502074](C:\Users\lpr\AppData\Roaming\Typora\typora-user-images\image-20240122183502074.png)
+
+# 2024_2_1
+
+## 二维链表trick
+
+可以开二位链表连右边和下边
+
+## 括号序列
+
+设$f(n,m,k)$表示有$n$个左括号，$m$个右括号，子序列中合法括号序列最长长度为$2k$的括号序列，转移为
+$$
+f(n,m,k)=
+\left\{
+\matrix{
+{n+m}\choose n && k\ge min(n,m)\\
+f(n-1,m,k-1)+f(n,m-1,k) && k<min(n,m)
+}
+\right.
+$$
+通过归纳可以得到
+$$
+f(n,m,k)=
+\left\{
+\matrix{
+{n+m}\choose n && k\ge min(n,m)\\
+{n+m}\choose k && k<min(n,m)
+}
+\right.
+$$

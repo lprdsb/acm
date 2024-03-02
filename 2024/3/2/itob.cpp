@@ -23,9 +23,20 @@ void read(T& x) {
     for(x = 0; isdigit(ch); x = x * 10 + ch - '0', ch = getchar());
     if(ok) x = -x;
 }
-char *s = "asdasd";
+
+char to(int x) {
+    if(x <= 9) return '0' + x;
+    else return 'a' + x - 10;
+}
+
+int n, m;
 
 int main() {
     //freopen("in", "r", stdin);
-    cout << s << endl;
+    read(n); read(m);
+    if(n < 0) putchar('-'), n = -n;
+    vector<int> vec;
+    while(n) vec.pb(n % m), n /= m;
+    reverse(vec.begin(), vec.end());
+    for(auto i : vec) printf("%c", to(i));
 }

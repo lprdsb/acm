@@ -23,9 +23,27 @@ void read(T& x) {
     for(x = 0; isdigit(ch); x = x * 10 + ch - '0', ch = getchar());
     if(ok) x = -x;
 }
-char *s = "asdasd";
+
+#define maxn 500000
+int f[maxn + 5];
 
 int main() {
-    //freopen("in", "r", stdin);
-    cout << s << endl;
+    freopen("in.txt", "w", stdout);
+    f[1] = 0;
+    For(i, 2, 100) {
+        for(int j = (i - 1) & i; j; j = (j - 1) & i) {
+            if(!f[j] && !f[i ^ j]) {
+                f[i] = 1;
+                break;
+            }
+        }
+    }
+    For(i, 1, 100) {
+        vector<int> vec;
+        int tem = i, cnt = 0;
+        while(tem) vec.pb(tem & 1), cnt += tem & 1, tem >>= 1;
+        if(cnt == 5) {
+            for(auto j : vec) printf("%d", j); printf(" %d\n", f[i]);
+        }
+    }
 }

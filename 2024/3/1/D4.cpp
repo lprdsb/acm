@@ -23,9 +23,8 @@ void read(T& x) {
     for(x = 0; isdigit(ch); x = x * 10 + ch - '0', ch = getchar());
     if(ok) x = -x;
 }
-char *s = "asdasd";
 
 int main() {
     //freopen("in", "r", stdin);
-    cout << s << endl;
+    cout << int(__builtin_popcountll(4611686018427387904)) << endl;
 }

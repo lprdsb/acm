@@ -23,9 +23,20 @@ void read(T& x) {
     for(x = 0; isdigit(ch); x = x * 10 + ch - '0', ch = getchar());
     if(ok) x = -x;
 }
-char *s = "asdasd";
+
+#define maxn 100000
+int n, f[maxn + 5], g[27];
+char s[maxn + 5];
 
 int main() {
     //freopen("in", "r", stdin);
-    cout << s << endl;
+    scanf("%s", s + 1);
+    n = strlen(s + 1);
+    int res = 0;
+    For(i, 1, n) {
+        For(o, 0, s[i] - 'a') f[i] = max(f[i], g[o] + 1);
+        g[s[i] - 'a'] = max(g[s[i] - 'a'], f[i]);
+        res = max(res, f[i]);
+    }
+    printf("%d\n", res);
 }

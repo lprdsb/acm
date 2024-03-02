@@ -23,9 +23,40 @@ void read(T& x) {
     for(x = 0; isdigit(ch); x = x * 10 + ch - '0', ch = getchar());
     if(ok) x = -x;
 }
-char *s = "asdasd";
+
+int T;
+LL x, y;
+
+void mian() {
+    read(x); read(y);
+    LL tem = 0;
+    int fl = 0;
+    Rof(o, 62, 0) {
+        if(((x >> o) & 1) && !((y >> o) & 1)) {
+            if(fl) {
+                printf("2\n%lld ", x);
+                x = tem | (((1ll << o) - 1) & y);
+                printf("%lld %lld\n", x, y);
+                return;
+            }
+            tem |= 1ll << o;
+            fl = 1;
+        }
+        if(((x >> o) & 1) && ((y >> o) & 1)) {
+            printf("1\n%lld %lld\n", x, y);
+            return;
+        }
+        if(!((x >> o) & 1) && ((y >> o) & 1)) {
+            puts("-1");
+            return;
+        }
+    }
+}
 
 int main() {
     //freopen("in", "r", stdin);
-    cout << s << endl;
+    read(T);
+    while(T--) {
+        mian();
+    }
 }

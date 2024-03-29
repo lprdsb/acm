@@ -168,3 +168,9 @@ $$
 $$
 \max_{0\leq i \le a,0\le j\le b}i|j=(a | b)|(2^{\log(a\&b) + 1}-1)
 $$
+
+# 2024_3_19
+
+序列trick
+
+对于一个长度为$n$的$x,x,...,x+1,x+1$的序列，记他们的总和为$s$，则第$i$个数为$\lfloor\frac{s+i}{n}\rfloor$。

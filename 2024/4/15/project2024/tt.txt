@@ -1,0 +1,7 @@
+{int,,,,;*=fopen("","");scanf("",,);for(=0;<;++)for(=0;<;++){[][].=[][].=;[][].=[][].=0;}FUNC();=FUNC();=FUNC();FUNC(,);for(=;!=;=[]){[]=;++;}FUNC(,);return0;}
+{int,,,;char[30];fscanf(,"",&);for(=0;<;++){fscanf(,"",&,&);=-1;for(=0;<;++){fscanf(,"",,&);=FUNC();if(==-1){strcpy([].,);[].=;if(!=-1){[][].=[][].=;[][].=[][].=1;}=;++;}else{if(!=-1){[][].=[][].=;[][].=[][].=1;}=;}}}}
+{int;for(=0;<;++)if(strcmp(,[].)==0)return;return-1;}
+{int,,,,;int[];for(=0;<;++){[]=0;[]=;[]=[][].;}[]=0,[]=1;for(=0;<-1;++){=;for(=0;<;++){if([]==0&&[]<){=[];=;}}[]=1;if(==)return;for(=0;<;++){=([][].==?:(+[][].));if([]==0&&(<[])&&[][].>0){[]=;[]=;}}}}
+{int,=,=1,=[-1];int=[][].;printf("",[].,);=;for(=-2;>=0;--){=[];if(!=[][].){=[][].;printf("",,[].,);=0;}++;=;}printf("",,[].);}
+
+{inti,j,ContainID,EdgeLast;charstationName[30];fscanf(fp,"",&lineNum);for(i=0;i<lineNum;i++){fscanf(fp,"",&lineID,&StationNum);EdgeLast=-1;for(j=0;j<StationNum;j++){fscanf(fp,"",stationName,&IsChange);ContainID=SearchMap(stationName);if(ContainID==-1){strcpy(StationID_list[VerNum].stationName,stationName);StationID_list[VerNum].IsChange=IsChange;

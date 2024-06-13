@@ -23,7 +23,8 @@ void read(T& x) {
     for(x = 0; isdigit(ch); x = x * 10 + ch - '0', ch = getchar());
     if(ok) x = -x;
 }
-#define maxn 300000
+
+#define maxn 1000000
 
 struct SA {
     int n, m, rk[maxn + 5], sum[maxn + 5], to[maxn + 5], nto[maxn + 5], rk2[maxn + 5], cnt, ncnt;
@@ -97,53 +98,63 @@ struct SA {
     int lcp(int p1, int p2) { return rmq.que(to[p1], to[p2]); }
 } sa;
 
-int n, k, vis[maxn + 5], num[26], fl = 0;
+int T, n, las[maxn + 5], pre[maxn + 5];
 char s[maxn + 5];
+
 void mian() {
-    read(n); read(k);
-    scanf("%s", s + 1);
+    scanf("%s", s + 1); n = strlen(s + 1);
     sa.init(s);
-    For(i, max(1, n / 4 - 5), n / 2) {
-        int tot = 0, now = 1;
-        vector<int> vec;
-        while(tot <= 2 * k + 10 && i + now <= n) {
-            int lc = sa.lcp(now, i + now);
-            int to = (now + lc - 1) % i + 1;
-            vec.pb(to);
-            now += lc + 1;
-            if(i + now <= n) tot++;
+    pre[0] = 0;
+    For(i, 1, n) {
+        if(s[i] == 'a') {
+            pre[i] = pre[i - 1] + 1;
         }
-        if(tot > 2 * k + 10) continue;
-        int sum = 0;
-        for(auto v : vec) if(!vis[v]) {
-            vis[v] = 1;
-            int now = v, mx = 0;
-            while(now <= n) {
-                int to = s[now] - 'a';
-                num[to]++;
-                if(num[to] > mx) mx = num[to];
-                now += i;
-            }
-            sum += (n - v) / i + 1 - mx;
-            now = v;
-            while(now <= n) {
-                int to = s[now] - 'a';
-                num[to]--;
-                now += i;
-            }
-        }
-        for(auto v : vec) vis[v] = 0;
-        if(sum <= k) {
-            puts("Yes");
-            return;
-        }
+        else pre[i] = 0;
     }
-    puts("No");
+    las[n + 1] = 0;
+    Rof(i, n, 1) {
+        if(s[i] == 'a') {
+            las[i] = las[i + 1] + 1;
+        }
+        else las[i] = 0;
+    }
+    For(i, 1, n) if(s[i] != 'a') {
+        LL res = 0;
+        For(j, i, n) if(s[j] != 'a') {
+            int to = j + 1 + las[j + 1], p = j, fl = 1;
+            int mn = n;
+            // cout << j << "asd" << endl;
+            while(to <= n) {
+                int lcp = sa.lcp(i, to);
+                // cout << to << " " << lcp << endl;
+                if(lcp >= j - i + 1) {
+                    mn = min(mn, to - p - 1);
+                    p = to + j - i;
+                    to = p + 1 + las[p + 1];
+                }
+                else {
+                    fl = 0;
+                    break;
+                }
+            }
+            // cout << fl << endl;
+            if(fl) {
+                int a0 = pre[i - 1], b0 = las[p + 1];
+                res += 1ll * (2 + mn) * (mn + 1) / 2;
+                if(mn >= a0 + 1) res -= 1ll * (1 + mn - a0) * (mn - a0) / 2;
+                if(mn >= b0 + 1) res -= 1ll * (1 + mn - b0) * (mn - b0) / 2;
+                if(mn >= a0 + b0 + 2) res += 1ll * (mn - a0 - b0) * (mn - a0 - b0 - 1) / 2;
+            }
+        }
+        printf("%lld\n", res);
+        return;
+    }
+    printf("%d\n", n - 1);
 }
 
 int main() {
     // freopen("in.txt", "r", stdin);
-    int T; read(T); fl = T == 1000;
+    read(T);
     while(T--) {
         mian();
     }

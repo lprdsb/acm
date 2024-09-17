@@ -1,0 +1,7 @@
+3 5
+id name birth_place
+begin()
+insert(a,Alice,Beijing)
+insert(b,Bob,Beijing)
+insert(c,Yangqishaonian,Nowcoder)
+select(birth_place,birth_place,Beijing)

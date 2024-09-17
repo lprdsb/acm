@@ -224,3 +224,17 @@ $$
 # 2024_7_19 无向图n个点路径不重配对
 可以考虑对无向图建出生成树，转化成在树上的点路径配对的形式。
 考虑树上配对，可以像dp一样对某个子树配对，会决定留不留一个点使用父亲这条边。
+
+# 2024_7_31 无平方字串构造
+用0，1，2构造无平方子串，a_i=popcount(i-1)-popcount(i)+1
+
+# 2024_8_4 费马点（到三角形顶点之和最小的点）
+1.如果有度数大于120的角，则该点为费马点。
+2.否则为某条边为底边往外作正三角形，将外面的点与这条边以外的那个点连线就为最短长度。 
+
+$$f(X, \, Y, \, Z) = \sqrt{\frac{a^2+b^2+c^2+4\sqrt{3}S}{2}}.$$
+![111](https://mmbiz.qpic.cn/sz_mmbiz_jpg/4ahGexcaNnhCxput1TUh6Ndq2icTS0BbnrXloD7flgT2PKdzbq5BMekZibgVPyuZiczhu8xcg5CrbcqRLeC3y9Ntw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+
+# 2024_8_4 求单调上升总和为n的数列的方案数
+可以考虑数列总长不超过根号级别。
+考虑dp, $ f_{i,j} $表示，长度为i总和为j的方案数，每次转移为添加一个数或者把所有数加1。

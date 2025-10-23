@@ -1,0 +1,155 @@
+
+#include<bits/stdc++.h>
+#define For(i, a, b) for(int i = (a), en = (b); i <= en; ++i)
+#define Rof(i, a, b) for(int i = (a), en = (b); i >= en; --i)
+#define Tra(u, i) for(int i = hd[u]; ~i; i = e[i].net)
+#define cst const
+#define LL long long
+#define DD double
+#define LD long double
+#define pb push_back
+#define mp make_pair
+#define fir first
+#define sec second
+#define inf 0x3f3f3f3f
+#define Inf 0x3f3f3f3f3f3f3f3f
+#define eps 1e-12
+using namespace std;
+
+template <class T>
+void read(T& x) {
+    char ch;
+    bool ok;
+    for(ok = 0, ch = getchar(); !isdigit(ch); ch = getchar()) if(ch == '-') ok = 1;
+    for(x = 0; isdigit(ch); x = x * 10 + ch - '0', ch = getchar());
+    if(ok) x = -x;
+}
+
+#define maxn 1000000
+namespace Geometry {
+
+    int dcmp(LL x) {
+        if(x == 0) return 0;
+        return x < 0 ? -1 : 1;
+    }
+
+    struct Vector {
+        LL x, y;
+        DD len() { return sqrt(x * x + y * y); }
+        LL len2() { return x * x + y * y; }
+        friend Vector operator + (Vector _x, cst Vector &_y) { return { _x.x + _y.x, _x.y + _y.y }; }
+        friend Vector operator - (Vector _x, cst Vector &_y) { return { _x.x - _y.x, _x.y - _y.y }; }
+        friend Vector operator * (cst DD &_x, cst Vector &_y) { return { _x * _y.x, _x * _y.y }; }
+        friend LL operator * (cst Vector &_x, cst Vector &_y) { return _x.x * _y.x + _x.y * _y.y; }
+        friend LL operator ^ (cst Vector &_x, cst Vector &_y) { return _x.x * _y.y - _x.y * _y.x; }
+        // friend Vector operator / (cst Vector &_x, cst DD &_y) { return { _x.x / _y, _x.y / _y }; }
+        Vector operator ~ () cst { return { -y, x }; }
+    };
+    struct Line {
+        Vector x, v;
+        Line() {}
+        Line(cst Vector &_x, cst Vector &_y) { x = _x;  v = _y - _x; }
+        friend Vector operator & (cst Line &_x, cst Line &_y) {
+            DD t = (_y.x - _x.x) * (~_y.v) / (_x.v * ~_y.v + eps);
+            return _x.x + t * _x.v;
+        }
+    };
+
+    DD get_s(Vector *a, int n) {
+        DD s = a[n] ^ a[1];
+        For(i, 1, n - 1) s += a[i] ^ a[i + 1];
+        return fabs(s) / 2;
+    }
+
+    namespace HalfPlaneCross {
+        int n;
+        Line a[maxn + 5];
+        int dq[maxn + 5], l = 1, r = 0;
+        Vector cro[maxn + 5];
+        DD get_cro_s() {
+            For(i, 1, r - l) cro[i] = a[dq[l + i - 1]] & a[dq[l + i]];
+            cro[r - l + 1] = a[dq[r]] & a[dq[l]];
+            return get_s(cro, r - l + 1);
+        }
+        void mian() {
+            For(i, 1, n) a[i].v.y += i * eps;
+            sort(a + 1, a + n + 1, [](cst Line &_x, cst Line &_y) {return atan2(_x.v.y, _x.v.x) < atan2(_y.v.y, _y.v.x);});
+            For(i, 1, n) {
+                while(l < r && dcmp(a[i].v ^ ((a[dq[r]] & a[dq[r - 1]]) - a[i].x)) <= 0) r--;
+                dq[++r] = i;
+            }
+            while(l < r && dcmp(a[dq[l]].v ^ ((a[dq[r]] & a[dq[r - 1]]) - a[dq[l]].x)) <= 0) r--;
+            while(l < r && dcmp(a[dq[l + 1]].v ^ ((a[dq[l]] & a[dq[r]]) - a[dq[l + 1]].x)) <= 0) l++;
+        }
+        void init(Line *_a, int _n) {
+            l = 1; r = 0;
+            n = _n;
+            For(i, 1, n) a[i] = _a[i];
+            mian();
+        }
+    }
+
+    namespace Convex {
+        int n, l, r;
+        Vector a[maxn + 5];
+        int dq[maxn + 5];
+        DD get_len() {
+            DD res = (a[dq[1]] - a[dq[r]]).len();
+            For(i, 1, r - l) res += (a[dq[l + i - 1]] - a[dq[l + i]]).len();
+            return res;
+        }
+        LL mian() {
+            sort(a + 1, a + n + 1, [](cst Vector &_x, cst Vector &_y) {return _x.x == _y.x ? _x.y < _y.y : _x.x < _y.x;});
+            For(i, 1, n) {
+                while(l < r && ((a[dq[r]] - a[dq[r - 1]]) ^ (a[i] - a[dq[r]])) <= 0) r--;
+                dq[++r] = i;
+            }
+            int tem = r;
+            Rof(i, n, 1) {
+                while(r > tem && ((a[dq[r]] - a[dq[r - 1]]) ^ (a[i] - a[dq[r]])) <= 0) r--;
+                dq[++r] = i;
+            }
+            LL s = 0;
+            For(i, l + 1, r) dq[++r] = dq[i];
+            int now = l;
+            LL res = 0;
+            For(i, l, r - 1) {
+                while(now < r && ((a[dq[i]] - a[dq[i + 1]]) ^ (a[dq[now + 1]] - a[dq[now]])) <= 0) now++;
+                res = max(res, max((a[dq[now]] - a[dq[i]]).len2(), (a[dq[now]] - a[dq[i + 1]]).len2()));
+            }
+            // DD s = a[dq[r]] ^ a[dq[l]];
+            return res;
+
+        }
+        void init(Vector *_a, int _n) {
+            l = 1, r = 0;
+            n = _n;
+            For(i, 1, n) a[i] = _a[i];
+        }
+    }
+}
+
+using namespace Geometry;
+// using Vector = Geometry::Vector;
+// using Line = Geometry::Line;
+
+// #define maxn 100000
+Vector v[maxn + 5];
+
+void mian() {
+    int n; read(n);
+    For(i, 1, n) scanf("%lld%lld", &v[i].x, &v[i].y);
+    Convex::init(v, n);
+    printf("%lld\n", Convex::mian());
+}
+
+int main() {
+    // freopen("in.txt", "r", stdin);
+    int T; read(T);
+    while(T--) {
+        mian();
+    }
+    return 0;
+}
+
+

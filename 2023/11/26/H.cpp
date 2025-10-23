@@ -20,24 +20,24 @@ using namespace std;
 int n;
 
 template <class T>
-void read(T &x){
-	char ch;
-	bool ok;
-	for(ok = 0, ch = getchar(); !isdigit(ch); ch = getchar()) if(ch == '-') ok = 1;
-	for(x = 0; isdigit(ch); x = x * 10 + ch - '0', ch = getchar());
-	if(ok) x = -x;
+void read(T &x) {
+    char ch;
+    bool ok;
+    for(ok = 0, ch = getchar(); !isdigit(ch); ch = getchar()) if(ch == '-') ok = 1;
+    for(x = 0; isdigit(ch); x = x * 10 + ch - '0', ch = getchar());
+    if(ok) x = -x;
 }
 
 LL P[maxn + 5];
-LL sol(LL lim){
+LL sol(LL lim) {
     if(lim == -1) return 0;
     map<LL, LL> ma;
     ma[-lim] = 1;
-    For(i, 1, n){
+    For(i, 1, n) {
         LL tem = 0;
         // cout << "asd" << endl;
         // for(auto [k, v] : ma) cout << k << " " << v << endl;
-        while(ma.size() && -ma.begin()->fir >= P[i]){
+        while(ma.size() && -ma.begin()->fir >= P[i]) {
             pair<LL, LL> pa = *ma.begin();
             ma.erase(ma.begin());
             tem = (tem + (-pa.fir) / P[i] % mod * pa.sec % mod) % mod;
@@ -53,13 +53,13 @@ LL sol(LL lim){
 
 LL L, R;
 
-int main(){
-	// freopen("in.txt", "r", stdin);
+int main() {
+    // freopen("in.txt", "r", stdin);
     read(n);
     read(L); read(R);
-    For(i, 1, n){
+    For(i, 1, n) {
         read(P[i]);
-        if(P[i] == 1){
+        if(P[i] == 1) {
             puts("0");
             return 0;
         }
